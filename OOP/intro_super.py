@@ -84,10 +84,26 @@ class Triangle:
     def what_am_i(self):
         return "Triangle"
 
-class RightPyramid(Triangle, Square2):
+#Mixins
+
+class SurfaceAreaMixin:
+    # the mixin does not need to understand what is the shape of the surface
+    def surface_area(self):
+        surface_area = 0
+        for surface in self.surfaces: #define self.surfaces for different classes
+            surface_area += surface.area(self)
+
+        return surface_area
+
+class RightPyramid(Triangle, Square2, SurfaceAreaMixin):
     def __init__(self, base, slant_height):
         self.base = base 
         self.slant_height = slant_height
+
+        self.height = slant_height
+        self.length = base 
+
+        self.surfaces = [Square2, Triangle, Triangle, Triangle, Triangle]
 
     def what_am_i(self):
         return "RightPyramid"
@@ -96,5 +112,24 @@ rp = RightPyramid(2, 4)
 print(super(RightPyramid, rp).what_am_i()) #print the first inheritance
 print(rp.__class__.__bases__)
 print(RightPyramid.__mro__) # method resolution order
+
+# #Mixins
+
+# class SurfaceAreaMixin:
+#     # the mixin does not need to understand what is the shape of the surface
+#     def surface_area(self):
+#         surface_area = 0
+#         for surface in self.surfaces: #define self.surfaces for different classes
+#             surface_area += surface.area(self)
+
+#         return surface_area
+
+class Cube2(Square2, SurfaceAreaMixin):
+    def __init__(self, length):
+        super().__init__(length)
+        self.surfaces = [Square2] * 6
+
+another_cube = Cube2(4)
+print(another_cube.surface_area())
 
 
