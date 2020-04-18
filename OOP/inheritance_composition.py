@@ -70,6 +70,41 @@ payroll_system.calculate_payroll([
     commission_employee
 ])
 
-     
+class Manager(SalaryEmployee):
+    def work(self, hours):
+        print(f'{self.name} screams and yells for {hours}.')
 
-    
+class Secretary(SalaryEmployee):
+    def work(self, hours):
+        print(f'{self.name} expends {hours} hours doing office paperwork.')
+
+class SalesPerson(ComissionEmployee):
+    def work(self, hours):
+        print(f'{self.name} expends {hours} hours on the phone.')
+
+class FactoryWorker(HourlyEmployee):
+    def work(self, hours):
+        print(f'{self.name} manufactures gadgets for {hours} hours.')
+
+class ProductivitySystem:
+    def track(self, employees, hours):
+        print("Tracking productivity")
+        print('=====================')
+        for employee in employees:
+            employee.work(hours)
+
+        print('')
+
+      
+class TemporarySecretary(Secretary, HourlyEmployee):
+    def __init__(self, id, name, hours_worked, hour_rate):
+        HourlyEmployee.__init__(self, id, name, hours_worked, hour_rate)
+
+    def calculate_payroll(self):
+        return HourlyEmployee.calculate_payroll(self)
+
+#TODO: finish the rest materials on composition       
+
+
+
+
