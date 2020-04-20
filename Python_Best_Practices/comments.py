@@ -29,3 +29,5 @@ if __name__ == "__main__":
 
 #bulk comment: highlight, then command + /
 
+#DRY: Don't Repeat Yoursefl
+#Do not write twice 
