@@ -7,3 +7,7 @@ __pycache__/
 *.ipynb_checkpoints/
 *.npy
 *.npz
+
+*.csv 
+
+*.html
